@@ -120,9 +120,10 @@ class RemoteHelper(Helper):
         self.data = ''
         if logger().VERBOSE:
             logger().log("[helper] Remote Helper created")
+        return True
 
 
-    def start(self, start_driver):
+    def start(self, start_driver, driver_exists=False):
         logger().log("[helper] Connecting to %s:%d ..." % (self.host, self.port))
 
         while True:
@@ -140,20 +141,24 @@ class RemoteHelper(Helper):
         if logger().VERBOSE:
             logger().log("[helper] Remote Helper connected")
         self.driver_loaded = True
+        return True
 
 
-    def stop(self):
+    def stop(self, start_driver):
         self.conn.close()
         if logger().VERBOSE:
             logger().log("[helper] Remote Helper disconnected")
+        return True
 
-    def delete(self):
+    def delete(self, start_driver):
         if logger().VERBOSE:
             logger().log("[helper] Remote Helper deleted")
+        return True
 
-    def destroy(self):
-        self.stop()
-        self.delete()
+    def destroy(self, start_driver):
+        self.stop(start_driver)
+        self.delete(start_driver)
+        return True
 
 #
 # Get instance of this OS helper

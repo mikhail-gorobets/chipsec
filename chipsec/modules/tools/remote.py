@@ -104,7 +104,7 @@ class Remote(BaseModule):
                 break
             except socket.error as e:
                 if e.errno != errno.EADDRINUSE:
-                    logger().error(e)
+                    logger().error(str(e))
                     return ModuleResult.FAILED
 
         logger().log('Waiting for connections on %s:%d' % (host, port))
