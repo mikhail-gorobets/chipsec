@@ -1,0 +1,12 @@
+[Unit]
+Description=Chipsec Service
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=__script__
+
+[Install]
+WantedBy=multi-user.target
